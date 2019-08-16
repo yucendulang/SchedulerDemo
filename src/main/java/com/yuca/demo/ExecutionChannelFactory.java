@@ -1,5 +1,7 @@
 package com.yuca.demo;
 
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -9,20 +11,21 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+@Component
 public class ExecutionChannelFactory {
 
     List<ExecutionChannel> executionChannels = new ArrayList<>();
     public static ExecutorService terminalSimulator = Executors.newCachedThreadPool();
     public static AtomicInteger terminalID= new AtomicInteger(0);
-    final int min = 3;
-    final int range = 5;
+    final int min = 5;
+    final int range = 0;
 
     static ReentrantReadWriteLock rwl = new ReentrantReadWriteLock();
     static Lock rLock = rwl.readLock();
 
     public void initExecutionChannel(int n) {
         for (int i = 0; i < n; i++) {
-            executionChannels.add(new ExecutionChannel(ThreadLocalRandom.current().nextInt(min, min + range)));
+            executionChannels.add(new ExecutionChannel(min + (int) (range * Math.random())));
         }
     }
 

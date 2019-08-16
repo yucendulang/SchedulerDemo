@@ -17,7 +17,8 @@ public class Terminal {
     public void runTask(IDemoTask task) {
         running_status = true;
         try {
-            LOG.info("TerminalID:{} TaskID:{} RunTime:{} START TO RUN ", id, task.getID(),task.getRunTime());
+            LOG.info("TerminalID:{} TaskID:{} RunTime:{} RRN:{} PriorityLevel:{} START TO RUN ",
+                    id, task.getID(), task.getRunTime(), task.getRRN(), task.getPriorityLevel());
             task.run();
             LOG.info("TerminalID:{} TaskID:{} END TO RUN", id, task.getID());
         } catch (InterruptedException e) {
